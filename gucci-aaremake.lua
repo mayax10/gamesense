@@ -524,8 +524,9 @@ local ref = {
     safepoint = ui.reference("RAGE", "Aimbot", "Force safe point"),
     forcebaim = ui.reference("RAGE", "Aimbot", "Force body aim"),
 }
-username = hwidtabl.username
-build = "dev"
+
+username = "admin"
+build = "1.03alpha"
 ui.new_label("AA", "Anti-aimbot angles", "» gucci ~\a878787ff "..build)
 ui.new_label("AA", "Anti-aimbot angles", "    ")
 ui.new_label("AA", "Anti-aimbot angles", "user : \a878787ff"..username)
