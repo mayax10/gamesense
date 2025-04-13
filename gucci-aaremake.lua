@@ -526,16 +526,16 @@ local ref = {
 }
 
 username = "admin"
-build = "1.03alpha"
+build = "1.45alpha"
 ui.new_label("AA", "Anti-aimbot angles", "» gucci ~\a878787ff "..build)
 ui.new_label("AA", "Anti-aimbot angles", "    ")
 ui.new_label("AA", "Anti-aimbot angles", "user : \a878787ff"..username)
 ui.new_label("AA", "Anti-aimbot angles", "times loaded : \a878787ff"..data.load_count)
 ui.new_label("AA", "Anti-aimbot angles", " ")
 local menu = {
-    retard = ui.new_combobox("AA", "Anti-aimbot angles", "[selection]", "home","aa", "visual"),
+    retard = ui.new_combobox("AA", "Anti-aimbot angles", "[selection]", "\a878787ffhome","\a878787ffanti-aim", "\a878787ffvisuals"),
     ui.new_label("AA", "Anti-aimbot angles", "    "),
-    ui.new_label("AA", "Anti-aimbot angles", "\a878787ff‹------------------------------------------------›"),
+    ui.new_label("AA", "Anti-aimbot angles", "      "),
     ui.new_label("AA", "Anti-aimbot angles", "    "),
 
     hometext = ui.new_label("aa", "anti-aimbot angles","gucci ~ \a878787ffjoin our discord below"), --\a878787ff
@@ -549,12 +549,19 @@ local menu = {
     indclrtext = ui.new_label("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF indicators color"),
     main_clr = ui.new_color_picker("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF indicators color", 255,255,255, 255),
     main_clr2 = ui.new_color_picker("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF indicators color [2]", 255,255,255, 255),
-    indicatorsx = ui.new_multiselect('AA', 'Anti-aimbot angles', '⭐', "Crosshair", "Notify", "DTM", "Info", "Local", "CDZ"),
+    
+    watermarkenable = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF watermark"),
+    
+    defensiveindicator = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF defensive indicator"),
+    cdzenable = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF cool text"),
     cdz_custom = ui.new_textbox('AA', 'Anti-aimbot angles', "CDZ Text", "sa nu muncesc in zadar"),
+    
+    crossindicators = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF cross indicator"),
     dmgind = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF damage indicator"),
     killind = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF gucci killz"),
     dmgindcol = ui.new_color_picker("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF damage indicator color", 101, 219, 75, 255),
-    notifys = ui.new_multiselect('AA', 'Anti-aimbot angles', '\a878787ff✉\aFFFFFFFF notifications', "Hit", "Misses", "Switches"),
+    logsss = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF enable logs"),
+    notifys = ui.new_multiselect('AA', 'Anti-aimbot angles', '\a878787ffgucci.shop ⭒\aFFFFFFFF logs', "Hit", "Misses", "Switches"),
     consolelogs = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF console logs"),
     fs_toggle = ui.new_hotkey("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF freestanding"),
     lagcomp = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF low fl when hideshots"),
@@ -574,6 +581,7 @@ local menu = {
         pitch = ui.new_combobox("AA", "Anti-aimbot angles", "[\a878787ffBreaker\aFFFFFFFF] Pitch", "Up", "Down", "Random"),
         bodyyaw = ui.new_slider("AA", "Anti-aimbot angles", "[\a878787ffBreaker\aFFFFFFFF] Body yaw", -180, 180, 0),	
     },
+    localanimz = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF local animations"),
     animfucker = ui.new_multiselect('AA', 'Anti-aimbot angles', '\a878787ffgucci.shop ⭒\aFFFFFFFF animation breakers', 'Static legs in air', 'Zero pitch on land', 'Backward legs', "mj walk-air", 'abi walk'),
     knife_hotkey = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF avoid backstab"),
     knife_distance = ui.new_slider("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF avoid backstab radius",0,300,150,true,"u"),
@@ -598,7 +606,7 @@ end
     yawspeed = ui.new_slider("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF pace", 1, 4, 1, true, "", 1, {"Slower", "Normal","Faster", "Reductant"}),
     calc_yaw = ui.new_combobox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF calculation", "randomize", "by pace", "tick", "invert", "valor", "triple"),
     safehead_e = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF safe head"),
-    bodyyaw = ui.new_combobox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF body yaw", "off", "static", "opposite", "jitter", "playa"),
+    bodyyaw = ui.new_combobox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF body yaw", "off", "static", "opposite", "jitter", "playa", "vanguard"),
     bodyyaw_v = ui.new_slider("AA", "Anti-aimbot angles", " ", -180, 180, 0),
 }
 
@@ -634,7 +642,7 @@ function player_state()
 function xxx()
     yawtypeget = ui.get(newaa.yaw_type)
     calculation = ui.get(newaa.calc_yaw)
-    vs = ui.get(menu.retard) == "aa" and ui.get(menu.subtab_antiaim) == "main" and ui.get(menu.presets) == "Builder"
+    vs = ui.get(menu.retard) == "\a878787ffanti-aim" and ui.get(menu.subtab_antiaim) == "main" and ui.get(menu.presets) == "Builder"
     ui.set_visible(newaa.yaw_type, vs and true or false)
     ui.set_visible(newaa.yaw, (vs and (yawtypeget == "center")) and true or false)
     ui.set_visible(newaa.yaw2, (vs and (yawtypeget == "static")) and true or false)
@@ -739,6 +747,7 @@ function testaa()
         ui.set(ref.yaw[2],getyaw2)
     end
     value2x = manipulation_break(1,2,10)
+    value2x2 = manipulation_break(1,2,3)
     -- value playa
     playa_value = 0
     if value2x == 1 then
@@ -750,7 +759,10 @@ function testaa()
         if byawx == "playa" then
             ui.set(ref.byaw[1], "static")
             ui.set(ref.byaw[2], playa_value )
-        else
+        elseif byawx == "vanguard" then
+            ui.set(ref.byaw[1], value2x2 == 1 and "static" or "off")
+            ui.set(ref.byaw[2], playa_value )
+        elseif not byawx == "playa" or not byawx == "vanguard" then
             ui.set(ref.byaw[1], byawx)
             ui.set(ref.byaw[2], byawx2)
         end
@@ -1368,7 +1380,7 @@ function info_watermark()
     h = 25
     curtime = globals.curtime()
     string1 = "gucci"
-    ver_alpha = animations.anim_new('xxxxxxxx_alpha', contains(menu.indicatorsx, "Info") and 1 or 0)
+    ver_alpha = animations.anim_new('xxxxxxxx_alpha', ui.get(menu.watermarkenable) and 1 or 0)
     local textwidth, texty = renderer_measure_text("b", text_fade_animation(1.4, r,g,b,255, string1).." \a"..RGBAtoHEX(25,25,25,255*ver_alpha).."| ad \a"..RGBAtoHEX(70,70,70,255*ver_alpha)..""..playername.." · "..version.." · "..getTime()) -- 70
     w = textwidth+7
     local textwidth2, texty2 = renderer_measure_text("b", text_fade_animation(1.4, r,g,b,255, string1).." \a"..RGBAtoHEX(25,25,25,255*ver_alpha).."| ")
@@ -1415,10 +1427,10 @@ function dtmanager()
 
     
 
-    local alpha2 = animations.anim_new('sadasdsfxxsa', (contains(menu.indicatorsx, "DTM" ) and thanks and cacatu or ui.is_menu_open() and contains(menu.indicatorsx, "DTM")) and 1 or 0)
-    local wwx = animations.anim_new('sadasdsfsdasxxsa', (contains(menu.indicatorsx, "DTM" ) and thanks and cacatu or ui.is_menu_open() and contains(menu.indicatorsx, "DTM")) and 165 or 0)
-    local mxx = animations.anim_new('sadasdsfxxsxa', (contains(menu.indicatorsx, "DTM" ) and thanks and cacatu or ui.is_menu_open() and contains(menu.indicatorsx, "DTM")) and mx or 0)
-    local nnn = animations.anim_new('asxsadadxsaz', (contains(menu.indicatorsx, "DTM" ) and thanks and cacatu or ui.is_menu_open() and contains(menu.indicatorsx, "DTM")) and 100 or 0)
+    local alpha2 = animations.anim_new('sadasdsfxxsa', (ui.get(menu.defensiveindicator) and thanks and cacatu or ui.is_menu_open() and ui.get(menu.defensiveindicator)) and 1 or 0)
+    local wwx = animations.anim_new('sadasdsfsdasxxsa', (ui.get(menu.defensiveindicator) and thanks and cacatu or ui.is_menu_open() and ui.get(menu.defensiveindicator)) and 165 or 0)
+    local mxx = animations.anim_new('sadasdsfxxsxa', (ui.get(menu.defensiveindicator) and thanks and cacatu or ui.is_menu_open() and ui.get(menu.defensiveindicator)) and mx or 0)
+    local nnn = animations.anim_new('asxsadadxsaz', (ui.get(menu.defensiveindicator) and thanks and cacatu or ui.is_menu_open() and ui.get(menu.defensiveindicator)) and 100 or 0)
 
     local myself  = entity.get_local_player()
 
@@ -1498,7 +1510,7 @@ end
 
 function goanadupabani()
      x, y = client_screen_size()
-    is_enabled = contains(menu.indicatorsx, "CDZ" )
+    is_enabled = ui.get(menu.cdzenable)
     if not is_enabled then return end
     vafle = ui.get(menu.cdz_custom)
     if countLetters(vafle) == 0 then
@@ -1926,7 +1938,7 @@ local function normalize_yaw(yaw)
                 printc("\a"..RGBtoHEX(r,g,b).."gucci ~ \affffff"..string.format(" Hit "..RGBAtoHEX(r,g,b,255).."%s for %s in the %s [hc: %s, bt: %s, lc: %s] ", string.lower(entity.get_player_name(e.target)), e.damage, hitgroup_names[e.hitgroup + 1] or '?', math.floor(e.hit_chance).."%", stored_shot.backtrack, stored_shot.lagcomp))
             end
 
-            if not contains(menu.indicatorsx, "Notify") or not contains(menu.notifys, "Hit")  then return end
+            if not ui.get(menu.logsss) or not contains(menu.notifys, "Hit")  then return end
             local clr = "" -- \a6cd977ff
             local clr2 = "\affffffff" -- \a6cd977ff
             local dflt = "\affffffff"
@@ -1954,7 +1966,7 @@ local function normalize_yaw(yaw)
                 printc("\a"..RGBtoHEX(r,g,b).."gucci ~ \affffff"..string.format(" Missed %s's %s due to %s [dmg: %s, bt: %s, lc: %s] ", string.lower(entity.get_player_name(e.target)), stored_shot.hitbox, e.reason, stored_shot.damage, stored_shot.lagcomp, stored_shot.backtrack))
             end
 
-            if not contains(menu.indicatorsx, "Notify") or not contains(menu.notifys, "Misses")  then return end
+            if not ui.get(menu.logsss) or not contains(menu.notifys, "Misses")  then return end
 
             table.insert(render.notifications.table_text, {
                 text = string.format("Missed %s's %s due to %s [dmg: %s, bt: %s, lc: %s]", string.lower(entity.get_player_name(e.target)), stored_shot.hitbox, e.reason, stored_shot.damage, stored_shot.lagcomp, stored_shot.backtrack),
@@ -1975,7 +1987,7 @@ local function normalize_yaw(yaw)
         end
 
         local function brute_impact(e)
-            if (not ui.get(menu.antibrute_switch) and not contains(menu.indicatorsx, "Notify")) and not contains(menu.notifys, "Switches")  then return end
+            if (not ui.get(menu.antibrute_switch) and not ui.get(menu.logsss)) and not contains(menu.notifys, "Switches")  then return end
             local me = entity.get_local_player()
 
             if not entity.is_alive(me) then return end
@@ -2017,7 +2029,7 @@ local function normalize_yaw(yaw)
                         box_right_1 = 0
                     }) -- byaw
                     
-                elseif ui.get(menu.contains) == "Random" and contains(menu.notifys, "Switches") and contains(menu.indicatorsx, "Notify") then
+                elseif ui.get(menu.contains) == "Random" and contains(menu.notifys, "Switches") and ui.get(menu.logsss) then
                     brute.jitter = math.random(60, 75)
                     ui.set(ref.jitter[2], brute.jitter)
                     if ui.get(menu.consolelogs) then
@@ -2039,7 +2051,7 @@ local function normalize_yaw(yaw)
                         box_left_1 = 0,
                         box_right_1 = 0
                     }) 
-                elseif ui.get(menu.contains) == "RDS Exploit" and contains(menu.notifys, "Switches") and contains(menu.indicatorsx, "Notify") then
+                elseif ui.get(menu.contains) == "RDS Exploit" and contains(menu.notifys, "Switches") and ui.get(menu.logsss) then
                     brute.jitter = math.random(15, 75)
                     ui.set(ref.byaw[2], brute.jitter)
                     brute.jitter2 = math.random(60, 75)
@@ -2065,7 +2077,7 @@ local function normalize_yaw(yaw)
                     }) 
 
                 else
-                    if contains(menu.notifys, "Switches") and contains(menu.indicatorsx, "Notify") and contains(menu.indicatorsx, "Notify") then
+                    if contains(menu.notifys, "Switches") and ui.get(menu.logsss) and ui.get(menu.logsss) then
                     brute.phase = brute.phase + 1
                     local r,g,b,a = ui.get(menu.main_clr)
                     if ui.get(menu.consolelogs) then
@@ -2109,7 +2121,7 @@ local function normalize_yaw(yaw)
         brute.misses_ind = { }
         brute.misses = { }
         brute.phase = 0
-        if ui.get(menu.antibrute_switch)  and contains(menu.notifys, "Switches") and contains(menu.indicatorsx, "Notify")  then
+        if ui.get(menu.antibrute_switch)  and contains(menu.notifys, "Switches") and ui.get(menu.logsss)  then
             local r,g,b,a = ui.get(menu.main_clr)
             if ui.get(menu.consolelogs) then
                 printc("\a"..RGBtoHEX(r,g,b).."gucci ~ \affffff".."Anti-bruteforce data has been reset")
@@ -2953,7 +2965,7 @@ end
 
                                     ui.set(ref.pitch[1], "Custom")
                                     ui.set(ref.jitter[1], "Off")
-                                    ui.set(ref.pitch[2], -45)
+                                    ui.set(ref.pitch[2], math.random(1,3) == 1 and -45 or 0)
                                     valuexxx = manipulation_tick(0,90,1,2)
                                     ui.set(ref.yaw[2], math.random(1,2) == 1 and valuexxx or -valuexxx)
                                 else
@@ -3139,31 +3151,31 @@ end
 
                     ui.set_visible(ref.enablexxx, false)
                     SetTableVisibility({ref.pitch[1], ref.pitch[2], ref.yaw[1], ref.yaw[2], ref.yaw_base, ref.byaw[1], ref.byaw[2], ref.jitter[1], ref.jitter[2], ref.fby, ref.edge, ref.freestanding[1], ref.freestanding[2], ref.roll}, false)
-                    if ui.get(menu.retard) == "home" then
+                    if ui.get(menu.retard) == "\a878787ffhome" then
                     SetTableVisibility({menu.discords, menu.hometext, menu.hometext2}, true)
                     else
                     SetTableVisibility({menu.discords, menu.hometext, menu.hometext2}, false)
                     end
-                    if ui.get(menu.retard) == "visual" then
-                    SetTableVisibility({menu.main_clr, menu.main_clr2, menu.indclrtext, menu.indicatorsx, menu.dmgind, menu.killind, menu.dmgindcol, menu.ctagenable}, true)
-                    ui.set_visible(menu.notifys, (true and contains(menu.indicatorsx, "Notify")))
-                    ui.set_visible(menu.consolelogs, (true and contains(menu.indicatorsx, "Notify")))
-                    ui.set_visible(menu.animfucker, (true and contains(menu.indicatorsx, "Local")))
-                    ui.set_visible(menu.cdz_custom, (true and contains(menu.indicatorsx, "CDZ")))
+                    if ui.get(menu.retard) == "\a878787ffvisuals" then
+                    SetTableVisibility({menu.main_clr,menu.crossindicators, menu.logsss, menu.cdzenable, menu.localanimz, menu.watermarkenable, menu.defensiveindicator, menu.main_clr2, menu.indclrtext, menu.dmgind, menu.killind, menu.dmgindcol, menu.ctagenable}, true)
+                    ui.set_visible(menu.notifys, (true and ui.get(menu.logsss)))
+                    ui.set_visible(menu.consolelogs, (true and ui.get(menu.logsss)))
+                    ui.set_visible(menu.animfucker, (true and ui.get(menu.localanimz)))
+                    ui.set_visible(menu.cdz_custom, (true and ui.get(menu.cdzenable)))
                     SetTableVisibility({menu.arrows}, true)
                     else
-                    SetTableVisibility({menu.main_clr, menu.main_clr2, menu.cdz_custom, menu.arrows, menu.indclrtext, menu.indicatorsx, menu.notifys, menu.ctagenable, menu.consolelogs, menu.dmgind, menu.killind, menu.dmgindcol, menu.animfucker}, false)
+                    SetTableVisibility({menu.main_clr,menu.crossindicators, menu.logsss, menu.cdzenable, menu.localanimz, menu.watermarkenable, menu.defensiveindicator, menu.main_clr2, menu.cdz_custom, menu.arrows, menu.indclrtext, menu.notifys, menu.ctagenable, menu.consolelogs, menu.dmgind, menu.killind, menu.dmgindcol, menu.animfucker}, false)
                     end
-                    if ui.get(menu.retard) == "aa" then
+                    if ui.get(menu.retard) == "\a878787ffanti-aim" then
                 
                     SetTableVisibility({menu.subtab_antiaim, menu.presets}, true)
                     SetTableVisibility({menu.presets}, true)
-                    SetTableVisibility({ export_btn, import_btn}, ui.get(menu.subtab_antiaim) ~= "Keybinds" and ui.get(menu.presets) == "Builder")
+                    SetTableVisibility({ export_btn, import_btn, load_aa, save_aa}, ui.get(menu.subtab_antiaim) ~= "Keybinds" and ui.get(menu.presets) == "Builder")
                     SetTableVisibility({ menu.fs_toggle, menu.checkbox,menu.checkbox2, menu.lagcomp}, ui.get(menu.subtab_antiaim) == "settings")
                     SetTableVisibility({menu.checkbox,menu.checkbox2, menu.breaker_switch, menu.knife_hotkey}, ui.get(menu.subtab_antiaim) == "settings")
                     SetTableVisibility({menu.knife_distance}, ui.get(menu.knife_hotkey) and ui.get(menu.subtab_antiaim) == "settings")
                     else
-                    SetTableVisibility({menu.subtab_antiaim, menu.presets, export_btn, import_btn, menu.fs_toggle, menu.checkbox,menu.checkbox2, menu.breaker_switch, menu.knife_hotkey, menu.knife_distance, menu.lagcomp}, false)
+                    SetTableVisibility({menu.subtab_antiaim, menu.presets, export_btn, import_btn, load_aa, save_aa, menu.fs_toggle, menu.checkbox,menu.checkbox2, menu.breaker_switch, menu.knife_hotkey, menu.knife_distance, menu.lagcomp}, false)
                     end
                     if ui.get(menu.retard) == "Misc" then
                     SetTableVisibility({menu.exploits.yaw_1st, menu.exploits.yaw_2nd, menu.exploits.pitch, menu.exploits.bodyyaw}, false)
@@ -3171,19 +3183,19 @@ end
                     SetTableVisibility({menu.exploits.yaw_1st, menu.exploits.yaw_2nd, menu.exploits.pitch, menu.exploits.bodyyaw}, false)
                     end
 
-                    if ui.get(menu.retard) == "aa" and ui.get(menu.subtab_antiaim) == "Keybinds"then
+                    if ui.get(menu.retard) == "\a878787ffanti-aim" and ui.get(menu.subtab_antiaim) == "Keybinds"then
                         SetTableVisibility({ menu.presets}, false)
                     else
 
                     end
 
-                    if ui.get(menu.retard) == "aa" and ui.get(menu.subtab_antiaim) == "settings"then
+                    if ui.get(menu.retard) == "\a878787ffanti-aim" and ui.get(menu.subtab_antiaim) == "settings"then
                         SetTableVisibility({ menu.presets, import_btn,export_btn}, false)
                     else
 
                     end
 
-                    if ui.get(menu.retard) == "aa" and ui.get(menu.subtab_antiaim) == "phases"then
+                    if ui.get(menu.retard) == "\a878787ffanti-aim" and ui.get(menu.subtab_antiaim) == "phases"then
                         SetTableVisibility({ menu.presets}, false)
                         for i = 1, 5 do
                 
@@ -3239,7 +3251,7 @@ end
                         end
                     end
 
-                    if ui.get(menu.retard) == "aa" and ui.get(menu.subtab_antiaim) == "main" and (ui.get(menu.presets) == "Dynamic" or ui.get(menu.presets) == "Three-heads" or ui.get(menu.presets) == "Defensive-jitter") then
+                    if ui.get(menu.retard) == "\a878787ffanti-aim" and ui.get(menu.subtab_antiaim) == "main" and (ui.get(menu.presets) == "Dynamic" or ui.get(menu.presets) == "Three-heads" or ui.get(menu.presets) == "Defensive-jitter") then
                         ui.set_visible(menu.cannotview, true)
                     else
                         ui.set_visible(menu.cannotview, false)
@@ -3360,7 +3372,7 @@ end
                     dtaxzz = animations.anim_new('ax444', (ui.get(ref.dt[2])) and 11 or 0)
                     dtname = "DOUBLETAP"
                     local deez2 = animations.anim_new('asdasdddxxxd', (ui.get(ref.dt[2]) or ui.get(ref.os[2])) and -11 or 0)
-                    local alpha = animations.anim_new('asdasdddd', contains(menu.indicatorsx, "Crosshair")   and 1 or 0)
+                    local alpha = animations.anim_new('asdasdddd', ui.get(menu.crossindicators)   and 1 or 0)
                     ca = 255
                     ca = dt_r
                     ca2 = dt_g
@@ -3413,7 +3425,7 @@ end
 
                     lr,  lg, lb, la = 93,89,105,255
                     la = la/255
-                    if contains(menu.indicatorsx, "Crosshair") then
+                    if ui.get(menu.crossindicators) then
                         
                         -- renderer.text(x/2-measure/2+aaxs, y/2+2, r, g, b, 200-math.abs(1 * math.cos(2 * math.pi * (globals.curtime() /2)*2 )) * 100, 's', 0,  "★")
                         -- renderer.text(x/2+measure/2-4+aaxs, y/2+10, lr, lg, lb, 255 - math.abs(1 * math.cos(2 * math.pi * (globals.curtime() /2)*4 )) * 100, 's', 0,  "★")
@@ -3426,8 +3438,10 @@ end
                         justdt = animations.anim_new('indicatoranim_dtxxx', ui.get(ref.dt[2]) and 1 or 0)
                         nodt = "recharging"
                         yesdt = "ready"
-                        valet2 = yesdt:sub(1, 6*indicatoranim_dtyes)
+                        valet2 = text_fade_animation(1, 120, 245, 66,255, yesdt:sub(1, 6*indicatoranim_dtyes))
                         valet = text_fade_animation(3, 255,0,0,255, nodt:sub(1, 11*indicatoranim_dtno))
+                        ivalet = nodt:sub(1, 11*indicatoranim_dtno)
+                        ivalet2 = yesdt:sub(1, 6*indicatoranim_dtyes)
                         -- dtstate = ""
                         -- if indicatoranim_dtno > 0 then
                         --     dtstate = valet
@@ -3435,9 +3449,12 @@ end
                         --     dtstate = valet2
                         -- end
                         dtstate = "\a"..RGBAtoHEX(120, 245, 66,255*justdt)..""..valet2..""..valet
-                        dt_n = "\a"..RGBAtoHEX(255,255,255,255*justdt).."dt \a78f542ff"..dtstate
+                        dtstate2 = "\a"..RGBAtoHEX(255,255,255,255*justdt)..""..ivalet2.."\a"..RGBAtoHEX(150, 150, 150,255*justdt)..""..ivalet
+                        dt_n = "\a"..RGBAtoHEX(255,255,255,255*justdt).."dt "..dtstate
+                        dt_n2 = "\a"..RGBAtoHEX(255,255,255,255*justdt).."dt "..dtstate2
                         -- yes
                         measure_indc, measure_indcy = renderer.measure_text("-s", dt_n:upper())
+                        renderer.text(x/2-measure_indc/2, y/2+30+measure_indcy, 194, 194, 194, 255*justdt, '-s', 0,  dt_n2:upper())
                         renderer.text(x/2-measure_indc/2, y/2+30+measure_indcy, 255-135*indicatoranim_dtyes,255-10*indicatoranim_dtyes,255-195*indicatoranim_dtyes, (125+135*indicatoranim_dtyes)*justdt, '-s', 0,  dt_n:upper())
 
                         solus_render.container2(uiX + 2, uiY + 2, uiW, uiH, borderRadius, shadowColor)
@@ -3577,12 +3594,95 @@ end
                 
                 end)
             end
+
+                local export_cfg2 = function()
+                    local settings = {}
+    
+                    pcall(function()
+                    for key, value in pairs(newaa) do
+                        if value then
+                            settings[key] = {}
+    
+                            if type(value) == 'table' then
+                                for k, v in pairs(value) do
+                                    settings[key][k] = ui.get(v)
+                                end
+                            else
+                                settings[key] = ui.get(value)
+                            end
+                        end
+                    end
+                    local r,g,b,a = ui.get(menu.main_clr)
+    
+                    data.aasaved = requirements.base64.encode(json.stringify(settings), base64)
+                    table.insert(render.notifications.table_text, {
+                        text = text_fade_animation(9,r,g,b,a, ' Saved anti-aim config '),
+                        timer = globals.realtime(),
+                    
+                        smooth_y = render.notifications.c_var.screen[2] + 100,
+                        alpha = 0,
+                        alpha2 = 0,
+                        alpha3 = 0,
+                    
+                    
+                        box_left = 0,
+                        box_right = 0,
+                    
+                        box_left_1 = 0,
+                        box_right_1 = 0
+                    }) 
+                    
+                    end)
+            end
+            local import_cfg2 = function(to_import)
+                pcall(function()
+                local num_tbl = {}
+                local settings = json.parse(requirements.base64.decode(data.aasaved, base64))
+
+                for key, value in pairs(settings) do
+                    if type(value) == 'table' then
+                        for k, v in pairs(value) do
+                            if type(k) == 'number' then
+                                table.insert(num_tbl, v)
+                                ui.set(newaa[key], num_tbl)
+                            else
+                                ui.set(newaa[key][k], v)
+                            end
+                        end
+                    else
+                        ui.set(newaa[key], value)
+                    end
+                end
+
+
+
+                table.insert(render.notifications.table_text, {
+                    text = text_fade_animation(9,r,g,b,a, ' Loaded anti-aim settings'),
+                    timer = globals.realtime(),
+                
+                    smooth_y = render.notifications.c_var.screen[2] + 100,
+                    alpha = 0,
+                    alpha2 = 0,
+                    alpha3 = 0,
+                
+                
+                    box_left = 0,
+                    box_right = 0,
+                
+                    box_left_1 = 0,
+                    box_right_1 = 0
+                }) 
+                
+                end)
+            end
             import_btn = ui.new_button("AA", "Anti-aimbot angles", "Import settings", import_cfg)
             export_btn = ui.new_button("AA", "Anti-aimbot angles", "Export settings", export_cfg)
             import_antibrute = ui.new_button("AA", "Anti-aimbot angles", "Import phases", import_antibrute)
             export_antibrute = ui.new_button("AA", "Anti-aimbot angles", "Export phases", export_antibrute)
             save_antibrute = ui.new_button("AA", "Anti-aimbot angles", "Save phases", save_antibrute)
             load_antibrute = ui.new_button("AA", "Anti-aimbot angles", "Load phases", load_antibrute)
+            save_aa = ui.new_button("AA", "Anti-aimbot angles", "Save anti-aim settings", export_cfg2)
+            load_aa = ui.new_button("AA", "Anti-aimbot angles", "Load anti-aim settings", import_cfg2)
 
 
             client.set_event_callback("paint_ui",noti)
