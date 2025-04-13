@@ -344,9 +344,12 @@ local draw_logs = function()
 "",
 "",
 "                    \affffffYou have loaded \a26d0ffgucci.lua                    ",
-"               \a878787[nothing new....]",
-" ",                                                                                                                                                                                              
---O.G. L.E.A.K.S.
+"               \a878787added 'save config to db' in aa                    ",
+"               \a878787added 'load config from db' in aa                    ",
+"               \a878787reworked lua menu >> visuals                    ",
+"               \a878787[>] added 'vanguard' body yaw to antiaim                    ",
+"               \a878787made some changes to cross indicators                    ",
+"               \a878787made changes to defensive",                                                                                                                                                                                              
     }
 
     client.exec("clear")
