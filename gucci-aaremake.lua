@@ -530,11 +530,9 @@ local ref = {
 
 username = "admin"
 build = "1.45alpha"
-ui.new_label("AA", "Anti-aimbot angles", "» gucci ~\a878787ff "..build)
-ui.new_label("AA", "Anti-aimbot angles", "    ")
-ui.new_label("AA", "Anti-aimbot angles", "user : \a878787ff"..username)
 ui.new_label("AA", "Anti-aimbot angles", "times loaded : \a878787ff"..data.load_count)
 ui.new_label("AA", "Anti-aimbot angles", " ")
+
 local menu = {
     retard = ui.new_combobox("AA", "Anti-aimbot angles", "[selection]", "\a878787ffhome","\a878787ffanti-aim", "\a878787ffvisuals"),
     ui.new_label("AA", "Anti-aimbot angles", "    "),
@@ -568,7 +566,7 @@ local menu = {
     consolelogs = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF console logs"),
     fs_toggle = ui.new_hotkey("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF freestanding"),
     lagcomp = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF low fl when hideshots"),
-    arrows = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF manual arrows"),
+    arrows = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF arrows"),
     breaker_switch = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF defensive"),
     ctagenable = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF clantag"),
     checkbox = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF lean jumps"),
@@ -584,6 +582,8 @@ local menu = {
         pitch = ui.new_combobox("AA", "Anti-aimbot angles", "[\a878787ffBreaker\aFFFFFFFF] Pitch", "Up", "Down", "Random"),
         bodyyaw = ui.new_slider("AA", "Anti-aimbot angles", "[\a878787ffBreaker\aFFFFFFFF] Body yaw", -180, 180, 0),	
     },
+    trashtalk_enable = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF enable trashtalk"),
+    trashtalk_type = ui.new_combobox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF trashtalk", "advertise", "abi(gypsy)"),
     localanimz = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF local animations"),
     animfucker = ui.new_multiselect('AA', 'Anti-aimbot angles', '\a878787ffgucci.shop ⭒\aFFFFFFFF animation breakers', 'Static legs in air', 'Zero pitch on land', 'Backward legs', "mj walk-air", 'abi walk'),
     knife_hotkey = ui.new_checkbox("AA", "Anti-aimbot angles", "\a878787ffgucci.shop ⭒\aFFFFFFFF avoid backstab"),
@@ -643,6 +643,11 @@ function player_state()
     end
 
 function xxx()
+    if ui.get(menu.retard) == "\a878787ffvisuals" and ui.get(menu.trashtalk_enable) == true then
+        ui.set_visible(menu.trashtalk_type, true)
+    else
+        ui.set_visible(menu.trashtalk_type, false)
+    end
     yawtypeget = ui.get(newaa.yaw_type)
     calculation = ui.get(newaa.calc_yaw)
     vs = ui.get(menu.retard) == "\a878787ffanti-aim" and ui.get(menu.subtab_antiaim) == "main" and ui.get(menu.presets) == "Builder"
@@ -768,6 +773,9 @@ function testaa()
         elseif not byawx == "playa" or not byawx == "vanguard" then
             ui.set(ref.byaw[1], byawx)
             ui.set(ref.byaw[2], byawx2)
+        elseif byawx == "off" then
+            ui.set(ref.byaw[1], "off")
+            ui.set(ref.byaw[2], 0)
         end
     end
     condition = player_state() == 'jump' or player_state() == 'duckjump'
@@ -843,83 +851,52 @@ end
     return math.sqrt(x*x + y*y + z*z)
 end
 
+
+
+
+-- trashtalk
+
+
+
+
+
+
+userid_to_entindex, get_local_player, is_enemy, console_cmd = client.userid_to_entindex, entity.get_local_player, entity.is_enemy, client.exec
+
+ function on_player_death(e)
+    if not ui.get(menu.trashtalk_enable) then return end
+	victim_userid, attacker_userid = e.userid, e.attacker
+	if victim_userid == nil or attacker_userid == nil then
+		return
+	end
+
+    oracle = math.random(1,5)
+    oracle2 = math.random(1,10)
+    hsm = "1"
+    bam = "baimed"
+
+    if ui.get(menu.trashtalk_type) == "abi(gypsy)" then
+        if oracle == 1 then bam = "hai stai jos la picioarele mele si spala nazdravanele mele" elseif oracle == 2 then bam = "gen eu > tu" elseif oracle == 3 then bam = "esti mad caine te bat rauuuu" elseif oracle == 4 then bam = "zdreanta proasta" elseif oracle == 5 then bam = "inca un bot picat" end
+        if oracle == 1 then hsm = "hs zdreanta mica" elseif oracle == 2 then hsm = "s-a udat toata ma-ta la hs asta" elseif oracle == 3 then hsm = "m-am pisat pe tine bai 1" elseif oracle == 4 then hsm = "ai fugit repede sa cumperi gucci.lua $$$ .!." elseif oracle == 5 then hsm = "hsu asta dovedeste ca sunt stapanul tau :*" end
+    elseif ui.get(menu.trashtalk_type) == "advertise" then
+        if oracle2 == 1 then bam = "You actually had a chance… too bad you're not using gucci.lua" elseif oracle2 == 2 then bam = "Skill issue? Nah, more like no gucci.lua issue" elseif oracle2 == 3 then bam = "If only you had gucci.lua on skeet, you'd be dangerous." elseif oracle2 == 4 then bam = "Lost to gucci.lua. Again. Ever thought of upgrading?" elseif oracle2 == 5 then bam = "Bro fights like he’s using raw skeet in 2023" elseif oracle2 == 6 then bam = "Could’ve been different… if you ran gucci.lua" elseif oracle2 == 7 then bam = "Imagine peeking that wide without gucci.lua" elseif oracle2 == 8 then bam = "Not your fault, not everyone can afford gucci.lua" elseif oracle2 == 9 then bam = "You got the tools, but no drip. No gucci.lua = no win." elseif oracle2 == 10 then bam = "You’re like 80% there… but that missing 20% is gucci.lua." end
+        hsm = bam
+    end
+	victim_entindex = userid_to_entindex(victim_userid)
+	attacker_entindex = userid_to_entindex(attacker_userid)
+
+	if attacker_entindex == get_local_player() and is_enemy(victim_entindex) then
+		console_cmd("say ", e.headshot and hsm or bam)
+	end
+end
+client.set_event_callback("player_death", on_player_death)
+
+
+
+
+
 -- kz = 0
 
-alpha = 0
-fade_start_time = 0
-hold_duration = 0.5 -- seconds to hold full alpha
-fade_duration = 1.0 -- seconds to fade out
-last_kill_time = -1
-
--- Called when a player dies
-client.set_event_callback("player_death", function(event)
-    local_player = entity.get_local_player()
-   if not local_player then return end
-
-    attacker = client.userid_to_entindex(event.attacker)
-   if attacker == local_player then
-       alpha = 1
-       last_kill_time = globals.realtime()
-   end
-end)
-
-
-function killtracker()
-    if not ui.get(menu.killind) then return end
-    time = globals.realtime()
-    elapsed = time - last_kill_time
-    x,y = client.screen_size()
-
-    if last_kill_time >= 0 then
-        if elapsed > hold_duration then
-             fade_elapsed = elapsed - hold_duration*2
-             fade_factor = math.max(1 - (fade_elapsed / fade_duration), 0)
-            alpha = fade_factor
-        end
-    end
-
-    r2,g2,b2,a2 = ui.get(menu.main_clr)
-
-    getalpha = animations.anim_new('gotkillalpha', alpha > 0 and 1 or 0)
-    getalpha2 = animations.anim_new('gotkillalpha2', alpha > 0.9 and 1 or 0)
-    -- r,g,b,a = 29+(r2-29)*getalpha,29+(g2-29)*getalpha,29+(b2-29)*getalpha,255
-    r,g,b,a = 29+(r2-29)*getalpha2,29+(g2-29)*getalpha2,29+(b2-29)*getalpha2,255*getalpha
-
-    -- 1 kill\
-    bl = 20*getalpha
-    renderer.circle(x/2, y/3, 17,17,17, a, bl, 100, 100)
-    renderer.circle_outline(x/2, y/3, r,g,b,a, bl, 100, 100, 2)
-
-    -- 2 kills
-    x2 = x/2-18
-    y2 = y/3+18
-    renderer.circle(x2, y2, 17,17,17, a, bl, 100, 100)
-    renderer.circle_outline(x2, y2, r,g,b,a, bl, 100, 100, 2)
-
-    -- 3 kills
-    x2 = x/2+18
-    y2 = y/3+18
-    renderer.circle(x2, y2, 17,17,17, a, bl, 100, 100)
-    renderer.circle_outline(x2, y2, r,g,b,a, bl, 100, 100, 2)
-
-    -- 4 kills
-    x2 = x/2
-    y2 = y/3+36
-    renderer.circle(x2, y2, 17,17,17, a, bl, 100, 100)
-    renderer.circle_outline(x2, y2, r,g,b,a, bl, 100, 100, 2)
-
-    x,y = client.screen_size()
-
-    local svg = {
-        40,
-        40,
-        '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="0 0 32 32"><title>Color-Fill-5-1</title><path fill="#fff" d="M10.048 5.325c-2.778 0.576-4.301 1.293-5.926 2.803-3.034 2.816-4.198 7.283-2.893 11.2 0.538 1.6 1.267 2.752 2.611 4.109 1.408 1.421 2.445 2.086 4.224 2.701 1.178 0.41 1.267 0.422 3.328 0.422 2.112 0 2.112 0 3.494-0.486 1.267-0.435 1.421-0.461 1.728-0.294 0.666 0.346 2.15 0.717 3.264 0.832 2.15 0.218 4.467-0.294 6.49-1.434 1.203-0.678 2.957-2.394 3.622-3.546 2.138-3.699 2.163-7.654 0.064-11.2-0.64-1.088-2.56-3.034-3.584-3.635-2.842-1.664-6.003-1.971-9.203-0.896l-1.126 0.384-1.126-0.384c-0.614-0.205-1.498-0.448-1.958-0.512-0.806-0.141-2.483-0.166-3.008-0.064zM13.222 7.565l0.73 0.154-0.742 0.781c-0.397 0.435-0.96 1.126-1.242 1.549-0.499 0.755-1.344 2.534-1.344 2.842 0 0.128 0.294 0.166 1.062 0.166h1.075l0.461-0.947c0.461-0.934 1.754-2.47 2.534-3.034l0.384-0.269 0.525 0.358c0.794 0.55 1.6 1.536 2.253 2.765l0.602 1.126h1.062c1.216 0 1.19 0.026 0.73-1.114-0.486-1.229-1.178-2.291-2.061-3.238-0.448-0.474-0.819-0.896-0.819-0.922 0-0.038 0.346-0.141 0.768-0.23 1.062-0.23 3.29-0.102 4.352 0.243 2.483 0.794 4.723 3.034 5.517 5.517 0.333 1.024 0.474 3.354 0.256 4.365-0.627 3.021-2.995 5.606-5.965 6.515-1.165 0.358-2.739 0.461-3.802 0.269-1.229-0.243-1.242-0.269-0.486-1.050 0.819-0.858 1.574-1.933 2.061-2.97 0.397-0.858 0.883-2.598 0.883-3.187v-0.358h-4.992v2.035l2.445 0.077-0.474 0.96c-0.563 1.126-2.368 3.072-2.854 3.072-0.461 0-2.176-1.818-2.739-2.893-0.256-0.512-0.474-0.986-0.474-1.062 0-0.090 0.41-0.141 1.216-0.141h1.216v-2.048h-2.56c-2.138 0-2.56 0.026-2.56 0.179 0 0.102 0.090 0.589 0.192 1.075 0.41 1.958 1.344 3.776 2.675 5.21 0.461 0.499 0.666 0.794 0.563 0.845-0.371 0.23-1.869 0.397-2.88 0.32-3.482-0.269-6.502-2.624-7.539-5.888-1.536-4.813 1.242-9.779 6.157-11.034 0.819-0.205 2.88-0.218 3.814-0.038z"></path></svg>',
-    }
-    local svg = renderer.load_svg(svg[3], 40 , 40 )
-    renderer.texture(svg,x/2-20,y/3,40 ,40 ,r,g,b,a)
-end
-
-client.set_event_callback("paint", killtracker)
 
 thanks = false
 thanks2= false
@@ -1510,6 +1487,82 @@ function dtmanager()
     renderer_text(x/2-mx/2, y2/3+29, 255, 255, 255, 255*alpha2, "b", 0, string.format("gucci.shop ~ "..text_fade_animation(11, r,g,b,255*alpha2, "defensive")))
     -- renderer.circle_outline(x/2+mx/2+8, y2/3+36, r,g,b,255*alpha2, 4, math.random(0,180), 0.5, 2)
 end
+
+alpha = 0
+fade_start_time = 0
+hold_duration = 0.5 -- seconds to hold full alpha
+fade_duration = 1.0 -- seconds to fade out
+last_kill_time = -1
+
+-- Called when a player dies
+client.set_event_callback("player_death", function(event)
+    local_player = entity.get_local_player()
+   if not local_player then return end
+
+    attacker = client.userid_to_entindex(event.attacker)
+   if attacker == local_player then
+       alpha = 1
+       last_kill_time = globals.realtime()
+   end
+end)
+
+
+function killtracker()
+    if not ui.get(menu.killind) then return end
+    time = globals.realtime()
+    elapsed = time - last_kill_time
+    x,y = client.screen_size()
+
+    if last_kill_time >= 0 then
+        if elapsed > hold_duration then
+             fade_elapsed = elapsed - hold_duration*2
+             fade_factor = math.max(1 - (fade_elapsed / fade_duration), 0)
+            alpha = fade_factor
+        end
+    end
+
+    r2,g2,b2,a2 = ui.get(menu.main_clr)
+
+    getalpha = animations.anim_new('gotkillalpha', alpha > 0 and 1 or 0)
+    getalpha2 = animations.anim_new('gotkillalpha2', alpha > 0.9 and 1 or 0)
+    -- r,g,b,a = 29+(r2-29)*getalpha,29+(g2-29)*getalpha,29+(b2-29)*getalpha,255
+    r,g,b,a = 29+(r2-29)*getalpha2,29+(g2-29)*getalpha2,29+(b2-29)*getalpha2,255*getalpha
+
+    -- 1 kill\
+    bl = 20*getalpha
+    renderer.circle(x/2, y/3, 17,17,17, a, bl, 100, 100)
+    renderer.circle_outline(x/2, y/3, r,g,b,a, bl, 100, 100, 2)
+
+    -- 2 kills
+    x2 = x/2-18
+    y2 = y/3+18
+    renderer.circle(x2, y2, 17,17,17, a, bl, 100, 100)
+    renderer.circle_outline(x2, y2, r,g,b,a, bl, 100, 100, 2)
+
+    -- 3 kills
+    x2 = x/2+18
+    y2 = y/3+18
+    renderer.circle(x2, y2, 17,17,17, a, bl, 100, 100)
+    renderer.circle_outline(x2, y2, r,g,b,a, bl, 100, 100, 2)
+
+    -- 4 kills
+    x2 = x/2
+    y2 = y/3+36
+    renderer.circle(x2, y2, 17,17,17, a, bl, 100, 100)
+    renderer.circle_outline(x2, y2, r,g,b,a, bl, 100, 100, 2)
+
+    x,y = client.screen_size()
+
+    local svg = {
+        40,
+        40,
+        '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="0 0 32 32"><title>Color-Fill-5-1</title><path fill="#fff" d="M10.048 5.325c-2.778 0.576-4.301 1.293-5.926 2.803-3.034 2.816-4.198 7.283-2.893 11.2 0.538 1.6 1.267 2.752 2.611 4.109 1.408 1.421 2.445 2.086 4.224 2.701 1.178 0.41 1.267 0.422 3.328 0.422 2.112 0 2.112 0 3.494-0.486 1.267-0.435 1.421-0.461 1.728-0.294 0.666 0.346 2.15 0.717 3.264 0.832 2.15 0.218 4.467-0.294 6.49-1.434 1.203-0.678 2.957-2.394 3.622-3.546 2.138-3.699 2.163-7.654 0.064-11.2-0.64-1.088-2.56-3.034-3.584-3.635-2.842-1.664-6.003-1.971-9.203-0.896l-1.126 0.384-1.126-0.384c-0.614-0.205-1.498-0.448-1.958-0.512-0.806-0.141-2.483-0.166-3.008-0.064zM13.222 7.565l0.73 0.154-0.742 0.781c-0.397 0.435-0.96 1.126-1.242 1.549-0.499 0.755-1.344 2.534-1.344 2.842 0 0.128 0.294 0.166 1.062 0.166h1.075l0.461-0.947c0.461-0.934 1.754-2.47 2.534-3.034l0.384-0.269 0.525 0.358c0.794 0.55 1.6 1.536 2.253 2.765l0.602 1.126h1.062c1.216 0 1.19 0.026 0.73-1.114-0.486-1.229-1.178-2.291-2.061-3.238-0.448-0.474-0.819-0.896-0.819-0.922 0-0.038 0.346-0.141 0.768-0.23 1.062-0.23 3.29-0.102 4.352 0.243 2.483 0.794 4.723 3.034 5.517 5.517 0.333 1.024 0.474 3.354 0.256 4.365-0.627 3.021-2.995 5.606-5.965 6.515-1.165 0.358-2.739 0.461-3.802 0.269-1.229-0.243-1.242-0.269-0.486-1.050 0.819-0.858 1.574-1.933 2.061-2.97 0.397-0.858 0.883-2.598 0.883-3.187v-0.358h-4.992v2.035l2.445 0.077-0.474 0.96c-0.563 1.126-2.368 3.072-2.854 3.072-0.461 0-2.176-1.818-2.739-2.893-0.256-0.512-0.474-0.986-0.474-1.062 0-0.090 0.41-0.141 1.216-0.141h1.216v-2.048h-2.56c-2.138 0-2.56 0.026-2.56 0.179 0 0.102 0.090 0.589 0.192 1.075 0.41 1.958 1.344 3.776 2.675 5.21 0.461 0.499 0.666 0.794 0.563 0.845-0.371 0.23-1.869 0.397-2.88 0.32-3.482-0.269-6.502-2.624-7.539-5.888-1.536-4.813 1.242-9.779 6.157-11.034 0.819-0.205 2.88-0.218 3.814-0.038z"></path></svg>',
+    }
+    local svg = renderer.load_svg(svg[3], 40 , 40 )
+    renderer.texture(svg,x/2-20,y/3,40 ,40 ,r,g,b,a)
+end
+
+client.set_event_callback("paint", killtracker)
 
 function goanadupabani()
      x, y = client_screen_size()
@@ -3160,14 +3213,14 @@ end
                     SetTableVisibility({menu.discords, menu.hometext, menu.hometext2}, false)
                     end
                     if ui.get(menu.retard) == "\a878787ffvisuals" then
-                    SetTableVisibility({menu.main_clr,menu.crossindicators, menu.logsss, menu.cdzenable, menu.localanimz, menu.watermarkenable, menu.defensiveindicator, menu.main_clr2, menu.indclrtext, menu.dmgind, menu.killind, menu.dmgindcol, menu.ctagenable}, true)
+                    SetTableVisibility({menu.main_clr,menu.crossindicators, menu.logsss, menu.cdzenable, menu.localanimz, menu.watermarkenable, menu.trashtalk_enable, menu.defensiveindicator, menu.main_clr2, menu.indclrtext, menu.dmgind, menu.killind, menu.dmgindcol, menu.ctagenable}, true)
                     ui.set_visible(menu.notifys, (true and ui.get(menu.logsss)))
                     ui.set_visible(menu.consolelogs, (true and ui.get(menu.logsss)))
                     ui.set_visible(menu.animfucker, (true and ui.get(menu.localanimz)))
                     ui.set_visible(menu.cdz_custom, (true and ui.get(menu.cdzenable)))
                     SetTableVisibility({menu.arrows}, true)
                     else
-                    SetTableVisibility({menu.main_clr,menu.crossindicators, menu.logsss, menu.cdzenable, menu.localanimz, menu.watermarkenable, menu.defensiveindicator, menu.main_clr2, menu.cdz_custom, menu.arrows, menu.indclrtext, menu.notifys, menu.ctagenable, menu.consolelogs, menu.dmgind, menu.killind, menu.dmgindcol, menu.animfucker}, false)
+                    SetTableVisibility({menu.main_clr,menu.crossindicators, menu.logsss, menu.cdzenable, menu.localanimz, menu.watermarkenable,menu.trashtalk_enable,menu.defensiveindicator, menu.main_clr2, menu.cdz_custom, menu.arrows, menu.indclrtext, menu.notifys, menu.ctagenable, menu.consolelogs, menu.dmgind, menu.killind, menu.dmgindcol, menu.animfucker}, false)
                     end
                     if ui.get(menu.retard) == "\a878787ffanti-aim" then
                 
@@ -3422,7 +3475,7 @@ end
                     }
                     vertext = "g u c c i"
                     y = y+10
-                    local measure = renderer.measure_text("b", vertext:upper())
+                    local measure = renderer.measure_text("-s", vertext:upper())
                     yaw_indc = ui.get(newaa.calc_yaw):upper()
                     measure_indc, measure_indcy = renderer.measure_text("-s", "*"..yaw_indc.."*")
 
@@ -3433,7 +3486,7 @@ end
                         -- renderer.text(x/2-measure/2+aaxs, y/2+2, r, g, b, 200-math.abs(1 * math.cos(2 * math.pi * (globals.curtime() /2)*2 )) * 100, 's', 0,  "★")
                         -- renderer.text(x/2+measure/2-4+aaxs, y/2+10, lr, lg, lb, 255 - math.abs(1 * math.cos(2 * math.pi * (globals.curtime() /2)*4 )) * 100, 's', 0,  "★")
                         renderer.text(x/2-measure_indc/2, y/2+19, 255,255,255, 125, '-s', 0,  "*"..yaw_indc.."*")
-                        renderer.text(x/2-measure/2, y/2+28, r,g,b, 255, 'b', 0,  vertext:upper())
+                        renderer.text(x/2-measure/2, y/2+28, r,g,b, 255, '-s', 0,  vertext:upper())
 
                         -- dt settings
                         indicatoranim_dtno = animations.anim_new('indicatoranim_dtx', not dt_active and ui.get(ref.dt[2]) and 1 or 0)
@@ -3457,8 +3510,8 @@ end
                         dt_n2 = "\a"..RGBAtoHEX(255,255,255,255*justdt).."dt "..dtstate2
                         -- yes
                         measure_indc, measure_indcy = renderer.measure_text("-s", dt_n:upper())
-                        renderer.text(x/2-measure_indc/2, y/2+30+measure_indcy, 194, 194, 194, 255*justdt, '-s', 0,  dt_n2:upper())
-                        renderer.text(x/2-measure_indc/2, y/2+30+measure_indcy, 255-135*indicatoranim_dtyes,255-10*indicatoranim_dtyes,255-195*indicatoranim_dtyes, (125+135*indicatoranim_dtyes)*justdt, '-s', 0,  dt_n:upper())
+                        renderer.text(x/2-measure_indc/2, y/2+27+measure_indcy, 194, 194, 194, 255*justdt, '-s', 0,  dt_n2:upper())
+                        renderer.text(x/2-measure_indc/2, y/2+27+measure_indcy, 255-135*indicatoranim_dtyes,255-10*indicatoranim_dtyes,255-195*indicatoranim_dtyes, (125+135*indicatoranim_dtyes)*justdt, '-s', 0,  dt_n:upper())
 
                         solus_render.container2(uiX + 2, uiY + 2, uiW, uiH, borderRadius, shadowColor)
 
